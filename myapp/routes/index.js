@@ -8,13 +8,59 @@ var bcrypt = require('bcryptjs');
 
 // jwt require
 //var jwt = require('jsonwebtoken');
+
+//Middleware for existing Email check
+function checkExistingEmail(req, res, next) {
+  
+  var getCustomerData = customerModel.findOne({Email: req.body.email});
+  getCustomerData.exec((err, customerData) => {
+    if(err) throw err;
+    if(customerData != null) {
+      return res.render('index', { title: 'Project Interview', msg: 'Email Already Exists, Try Another One' });
+
+    }
+    next();
+  });
+}
+
+//Middleware for existing mobile number check
+function checkExistingMobileNumber(req, res, next) {
+  
+  var getCustomerData = customerModel.findOne({Mobilenumber: req.body.mobilenumber});
+  getCustomerData.exec((err, customerData) => {
+    if(err) throw err;
+    if(customerData != null) {
+      return res.render('index', { title: 'Project Interview', msg: 'Mobile Number Already Exists, Try Another One' });
+
+    }
+    next();
+  });
+}
+
+//Middleware for existing usename check
+function checkExistingUsername(req, res, next) {
+  
+  var getCustomerData = customerModel.findOne({Username: req.body.username});
+  getCustomerData.exec((err, customerData) => {
+    if(err) throw err;
+    if(customerData != null) {
+      return res.render('index', { title: 'Project Interview', msg: 'Username Already Exists, Try Another One' });
+
+    }
+    next();
+  });
+}
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Project Interview', msg: '' });
 });
 
 //sign up code
-router.post('/signup', function(req, res, next) {
+router.post('/signup', checkExistingEmail, checkExistingMobileNumber, checkExistingUsername, function(req, res, next) {
+
 var password = req.body.password;
 var confirmPassword = req.body.confirmpassword;
 if(password != confirmPassword) {
@@ -76,6 +122,8 @@ if(password != confirmPassword) {
       } 
     });   
     })
+
+
   /*
   router.post('/sigin', function(req, res, next) {
     var username = req.body.username;
@@ -112,5 +160,7 @@ if(password != confirmPassword) {
     })
   });
 */
+
+
 
 module.exports = router;

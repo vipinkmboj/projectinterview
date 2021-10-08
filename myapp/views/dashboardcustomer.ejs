@@ -8,14 +8,14 @@
     <h1 style="color: blanchedalmond;"><%= title %></h1>
     <h1 style="color: blanchedalmond;">Dashboard Customer</h1>
       <% if(msg != '') { %>
-        <h1><%= msg %></h1>
+        <h1 style="color: lightblue;"><%= msg %></h1>
       <% } %>
       <a href="/dashboardcustomer">
         <em style="color: rgb(71, 157, 255);">
             <% if(loginUser){ %>  
             <%= loginUser %> 
             <% } %>
-         </em>   
+        </em>   
       </a>
       <br/><br/>
       <form action="/signout" method="post" role="form">
