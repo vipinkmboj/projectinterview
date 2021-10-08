@@ -13,11 +13,11 @@ router.get('/', function(req, res, next) {
                 res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
 
             } if(productData != null) {
-                res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
+                res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: productData});
 
             } else {
 
-                res.render('dashboardcustomer', { title: 'Project Interview', msg: 'No Data Available', loginUser: loginUser, productData: productData });
+                res.render('dashboardcustomer', { title: 'Project Interview', msg: 'No Data Available', loginUser: loginUser, productData: '' });
 
             } 
         });

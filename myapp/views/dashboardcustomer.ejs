@@ -26,16 +26,22 @@
       <div>
           
           <h2>All Products</h2>
-        
+                       
+           
           <table>
               <tr>
-                  <th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th>
+                  <th>Id</th><th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th>
               </tr>
+              <% if(productData != '') { %>
+                <% productData.forEach(function(item) { %> 
               <tr>
-                  <td></td><td></td><td></td><td></td><td></td>
+                  <td><%= item._id %></td><td><%= item.ProductCategory %></td><td><%= item.ProductName %></td><td><%= item.ProductDetail %></td><td><%= item.ProductExpiry %></td><td><%= item.ProductPrice %></td>
               </tr>
+              <% }) %>            
+              <% } %>
           </table>
 
+         
       </div>
      
     
