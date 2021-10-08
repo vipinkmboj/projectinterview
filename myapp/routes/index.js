@@ -3,6 +3,8 @@ var router = express.Router();
 
 var customerModel = require('../models/customersignupschema');
 
+//get product data model 
+var productDataModel = require('../models/productdataschema');
 //encrypt passwords using bcrypt
 var bcrypt = require('bcryptjs');
 
@@ -55,7 +57,12 @@ function checkExistingUsername(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Project Interview', msg: '' });
+  var loginUser = req.session.customerLoginUserName;
+  if(loginUser) {
+    res.redirect('dashboardcustomer');
+  } else {
+    res.render('index', { title: 'Project Interview', msg: '' });
+  }  
 });
 
 //sign up code
@@ -160,7 +167,75 @@ if(password != confirmPassword) {
     })
   });
 */
+// Delete data
+router.get('/delete/:id', function(req, res, next) {
+  var loginUser = req.session.customerLoginUserName
+    if(loginUser) {
+      var productId = req.params.id;
+      productDataModel.findByIdAndDelete(productId, (err) => {
+        if(err) {
+          res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: '' });
+        } else {
 
+          res.render('dashboardcustomer', { title: 'Project Interview', msg: 'Product Deleted Successfully', loginUser: loginUser, productData: ''});
+        }
+      });
+    }
+  
+  
+  //res.render('index', { title: 'Project Interview', msg: '' });
+});
+
+//Edit data
+
+router.get('/edit/:id', function(req, res, next) {
+  var loginUser = req.session.customerLoginUserName
+    if(loginUser) {
+      var productId = req.params.id;
+      var getProductData = productDataModel.findById(productId);
+      getProductData.exec((err, existingData) => {
+        if(err) throw err;
+
+
+        res.render('edit', { title: 'Project Interview', msg: '', loginUser: loginUser, existingData: existingData});
+      });
+
+  
+  
+  //res.render('edit', { title: 'Project Interview', msg: '' });
+    }
+});
+
+//Edit data
+
+router.post('/update', function(req, res, next) {
+  var loginUser = req.session.customerLoginUserName
+    if(loginUser) {
+      
+      var updateProductDetails = productDataModel.findByIdAndUpdate(req.body.id, {
+        ProductCategory: req.body.productcategory,
+            ProductName: req.body.productname,
+            ProductDetail: req.body.productdetail,
+            ProductExpiry: req.body.productexpiry,
+            ProductPrice: req.body.productprice
+      });
+      updateProductDetails.exec((err, updatedData) => {
+        if(err) throw err;
+        res.redirect('dashboardcustomer');
+        //res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, existingData: existingData});
+
+      });
+      
+
+
+        //res.render('edit', { title: 'Project Interview', msg: '', loginUser: loginUser, existingData: existingData});
+     
+
+  
+  
+  //res.render('edit', { title: 'Project Interview', msg: '' });
+    }
+});
 
 
 module.exports = router;

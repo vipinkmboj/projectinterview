@@ -13,6 +13,8 @@ var signinRouter = require('./routes/signin');
 var dashboardcustomerRouter = require('./routes/dashboardcustomer');
 var signoutRouter = require('./routes/signout');
 var addnewdataRouter = require('./routes/addnewdata');
+var recyclebinRouter = require('./routes/recyclebin');
+var editRouter = require('./routes/edit');
 
 var app = express();
 
@@ -40,6 +42,8 @@ app.use('/signin', signinRouter);
 app.use('/dashboardcustomer', dashboardcustomerRouter);
 app.use('/signout', signoutRouter);
 app.use('/addnewdata', addnewdataRouter);
+app.use('/recyclebin', recyclebinRouter);
+app.use('/edit', editRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

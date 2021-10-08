@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1 style="color: blanchedalmond;"><%= title %></h1>
+    <h1 style="color: blanchedalmond;">Edit Page</h1>
+      <% if(msg != '') { %>
+        <h1 style="color: lightblue;"><%= msg %></h1>
+      <% } %>
+      <a href="/dashboardcustomer">
+        <em style="color: rgb(71, 157, 255);">
+            <% if(loginUser){ %>  
+            <%= loginUser %> 
+            <% } %>
+         </em>   
+      </a>
+      <br/><br/>
+      <form action="/signout" method="post" role="form">
+        <button type="submit"><em style="color: rgb(71, 157, 255);">Sign out</em></button>
+      </form>
+      <h2>Edit Data</h2>
+      
+      <form action="/update" method="POST" role="form">
+        <input type="hidden" name="id" value="<%= existingData._id %>"/>
+        <label>Product Category</label><br/>
+        <input type="text" name="productcategory" value="<%= existingData.ProductCategory %>"/><br/>
+        <label>Product Name</label><br/>
+        <input type="text" name="productname" value="<%= existingData.ProductName %>"/><br/>
+        <label>Product Detail</label><br/>
+        <input type="text" name="productdetail" value="<%= existingData.ProductDetail %>"/><br/>
+        <label>Product Expiry</label><br/>
+        <input type="date" name="productexpiry" value="<%= existingData.ProductExpiry %>"/><br/>
+        <label>Product Price</label><br/>
+        <input type="number" name="productprice" min="0" value="<%= existingData.ProductPrice %>"/><br/><br/>
+        <input type="submit" value="Add"/>
+      </form>
+     
+    
+   
+    
+  </body>
+</html>

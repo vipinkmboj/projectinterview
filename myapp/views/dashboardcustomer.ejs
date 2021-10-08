@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1 style="color: blanchedalmond;"><%= title %></h1>
-    <h1 style="color: blanchedalmond;">Dashboard Customer</h1>
+    <h1 style="color: blanchedalmond;">Dashboard Customer Page</h1>
       <% if(msg != '') { %>
         <h1 style="color: lightblue;"><%= msg %></h1>
       <% } %>
@@ -17,10 +17,15 @@
             <% } %>
         </em>   
       </a>
+     
       <br/><br/>
       <form action="/signout" method="post" role="form">
         <button type="submit"><em style="color: rgb(71, 157, 255);">Sign out</em></button>
       </form>
+
+      <br/><br/>
+      <a href="/recyclebin">Recycle Bin</a>
+      <br/><br/>
       <a href="/addnewdata">Add New Data</a>
       
       <div>
@@ -30,12 +35,12 @@
            
           <table>
               <tr>
-                  <th>Id</th><th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th>
+                  <th>Id</th><th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th><th>Delete</th>Edit<th></th>
               </tr>
               <% if(productData != '') { %>
                 <% productData.forEach(function(item) { %> 
               <tr>
-                  <td><%= item._id %></td><td><%= item.ProductCategory %></td><td><%= item.ProductName %></td><td><%= item.ProductDetail %></td><td><%= item.ProductExpiry %></td><td><%= item.ProductPrice %></td>
+                  <td><%= item._id %></td><td><%= item.ProductCategory %></td><td><%= item.ProductName %></td><td><%= item.ProductDetail %></td><td><%= item.ProductExpiry %></td><td><%= item.ProductPrice %></td><td><a href="/edit/<%= item._id %>">Edit</a></td><td><a href="/delete/<%= item._id %>">Delete</a></td>
               </tr>
               <% }) %>            
               <% } %>
