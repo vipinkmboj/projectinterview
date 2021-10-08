@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Sign up Page</h2>
+    <div class="all-forms">
+      <form action="/signup" method="POST" role="form">
+        <label>Full Name</label><br/>
+        <input type="text" name="fullname" placeholder="Enter Full Name....."/><br/>
+        <label>Email</label><br/>
+        <input type="email" name="email" placeholder="Enter Email....."/><br/>
+        <label>Mobile</label><br/>
+        <input type="text" name="mobilenumber" placeholder="Enter Mobile Number....."/><br/>
+        <label>Create Username</label><br/>
+        <input type="text" name="username" placeholder="Create Username....."/> <br/>
+        <label>Create Password</label><br/>
+        <input type="password" name="password" placeholder="Create Password....."/> <br/>
+        <label>Confirm Password</label><br/>
+        <input type="password" name="confirmpassword" placeholder="Confirm Password....."/> <br/><br/>
+        <input type="submit" value="Sign Up"/><br/>
+      </form>
+    </div>
+    <div class="all-anchors">
+      
+      <a href="/signin">Sign in</a>
+      <a href="/">Home</a>
+    </div>
+    
+  </body>
+</html>

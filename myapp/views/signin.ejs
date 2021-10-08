@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Sign in Page</h2>
+    <div class="all-forms">
+      <form action="/signin" method="POST" role="form">
+        <label>Enter Username</label><br/>
+        <input type="text" name="username" placeholder="Enter Username....."/> <br/>
+        <label>Enter Password</label><br/>
+        <input type="password" name="password" placeholder="Enter Password....."/> <br/>
+        <br/>
+        <input type="submit" value="Sign in"/><br/>
+      </form>
+    </div>
+    <div class="all-anchors">
+      
+      <a href="/signup">Sign up</a>
+      <a href="/">Home</a>
+    </div>
+    
+  </body>
+</html>

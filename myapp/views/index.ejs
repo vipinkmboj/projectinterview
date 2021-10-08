@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1 style="color: blanchedalmond;"><%= title %></h1>
+    
+      <% if(msg != '') { %>
+        <h1><%= msg %></h1>
+      <% } %>
+    
+    <div class="all-anchors">
+      <a href="/signup">Sign Up</a>
+      <a href="/signin">Sign in</a>
+      <a href="/signin">All Products</a>
+    </div>
+   
+    
+  </body>
+</html>
