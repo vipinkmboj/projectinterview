@@ -12,6 +12,7 @@ var signupRouter = require('./routes/signup');
 var signinRouter = require('./routes/signin');
 var dashboardcustomerRouter = require('./routes/dashboardcustomer');
 var signoutRouter = require('./routes/signout');
+var addnewdataRouter = require('./routes/addnewdata');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/signup', signupRouter);
 app.use('/signin', signinRouter);
 app.use('/dashboardcustomer', dashboardcustomerRouter);
 app.use('/signout', signoutRouter);
+app.use('/addnewdata', addnewdataRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

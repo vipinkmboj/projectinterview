@@ -23,20 +23,19 @@
       </form>
       <a href="/addnewdata">Add New Data</a>
       
-      <div>
-          
-          <h2>All Products</h2>
-        
-          <table>
-              <tr>
-                  <th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th>
-              </tr>
-              <tr>
-                  <td></td><td></td><td></td><td></td><td></td>
-              </tr>
-          </table>
-
-      </div>
+      <form action="/addnewdata" method="POST" role="form">
+        <label>Product Category</label><br/>
+        <input type="text" name="productcategory"/><br/>
+        <label>Product Name</label><br/>
+        <input type="text" name="productname"/><br/>
+        <label>Product Detail</label><br/>
+        <input type="text" name="productdetail"/><br/>
+        <label>Product Expiry</label><br/>
+        <input type="date" name="productexpiry"/><br/>
+        <label>Product Price</label><br/>
+        <input type="number" name="productprice" min="0"/><br/><br/>
+        <input type="submit" value="Add"/>
+      </form>
      
     
    
