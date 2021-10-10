@@ -70,7 +70,7 @@ router.post('/signup', checkExistingEmail, checkExistingMobileNumber, checkExist
 
 var password = req.body.password;
 var confirmPassword = req.body.confirmpassword;
-if(password != confirmPassword) {
+if(password != confirmPassword || password == '') {
   res.render('index', { title: 'Project Interview', msg: 'Password didn not match' });
 
 } else {
@@ -235,6 +235,90 @@ router.post('/update', function(req, res, next) {
   
   //res.render('edit', { title: 'Project Interview', msg: '' });
     }
+});
+
+// get dashboard
+
+router.get('/search', function(req, res, next) {
+  var loginUser = req.session.customerLoginUserName
+  if(loginUser) {
+
+      var productDataFromDataBase = productDataModel.find({Username: loginUser});
+      productDataFromDataBase.exec((err, productData) => {
+          if(err) {
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
+
+          } if(productData != null) {
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: productData});
+
+          } else {
+
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: 'No Data Available', loginUser: loginUser, productData: '' });
+
+          } 
+      });
+      //res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser });
+  } else {
+      res.redirect('/');
+      //res.render('index', { title: 'Project Interview', msg: '' });
+
+  }
+
+});
+
+// Filter / search code
+router.post('/search', function(req, res, next) {
+  var loginUser = req.session.customerLoginUserName;
+  if(loginUser) {  
+    
+    
+      var productDataFromDataBase = productDataModel.find({Username: loginUser});
+     
+
+      productDataFromDataBase.exec((err, productData) => {
+          if(err) {
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
+
+          } 
+          if(productData != null) {  
+            //          
+            var searchByName = req.body.searchbyname;            
+    
+            //
+            
+           productDataModel.find({$and:[{Username: loginUser},{ProductName: searchByName}]}, (err, productDataByName) => {
+            if(err) {
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
+
+            }             
+          
+            if(productDataByName != null) {
+
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: productDataByName});
+
+            } else {
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: productData});
+
+            }
+            
+           })
+
+            //
+              //res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: productData});
+
+          } else {
+
+              res.render('dashboardcustomer', { title: 'Project Interview', msg: 'No Data Available', loginUser: loginUser, productData: '' });
+
+          } 
+      });
+      //res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser });
+  } else {
+      res.redirect('/');
+      //res.render('index', { title: 'Project Interview', msg: '' });
+
+  }
+
 });
 
 

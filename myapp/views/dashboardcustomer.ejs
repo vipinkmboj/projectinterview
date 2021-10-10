@@ -3,28 +3,42 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <h1 style="color: blanchedalmond;"><%= title %></h1>
+    <div class="all-anchors">
+      <a href="/">Home</a>     
+      <a href="/">All Products</a>
+      
+    </div>
+    <div class="account">      
+      <span>
+        Signed in As:
+        <em style="color: rgb(71, 157, 255);">
+          <a href="/dashboardcustomer">
+            <% if(loginUser){ %>  
+            <%= loginUser %> 
+            <% } %>
+          </a>
+        </em>   
+      </span>     
+      
+      <form action="/signout" method="post" role="form">
+        <button class="signout" type="submit"><em style="color: rgb(71, 157, 255);">Sign out</em></button>
+      </form>
+    </div>
     <h1 style="color: blanchedalmond;">Dashboard Customer Page</h1>
       <% if(msg != '') { %>
         <h1 style="color: lightblue;"><%= msg %></h1>
       <% } %>
-      <a href="/dashboardcustomer">
-        <em style="color: rgb(71, 157, 255);">
-            <% if(loginUser){ %>  
-            <%= loginUser %> 
-            <% } %>
-        </em>   
-      </a>
+      
      
       <br/><br/>
-      <form action="/signout" method="post" role="form">
-        <button type="submit"><em style="color: rgb(71, 157, 255);">Sign out</em></button>
-      </form>
+      
 
-      <br/><br/>
-      <a href="/recyclebin">Recycle Bin</a>
+     
+     
       <br/><br/>
       <a href="/addnewdata">Add New Data</a>
       
@@ -32,10 +46,16 @@
           
           <h2>All Products</h2>
                        
-           
+          <form action="/search" method="post" role="form">
+            
+            <label>Search by Name</label>   <br/>         
+            <input type="text" name="searchbyname" placeholder="Serch here..." required/>
+            <button type="submit">Search</button>
+          </form>
+          <br/><br/>
           <table>
               <tr>
-                  <th>Id</th><th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th><th>Delete</th>Edit<th></th>
+                  <th>Id</th><th>Category</th><th>Name</th><th>Details</th><th>Expiry</th><th>Price</th><th>Edit</th><th>Delete</th>
               </tr>
               <% if(productData != '') { %>
                 <% productData.forEach(function(item) { %> 
@@ -48,8 +68,16 @@
 
          
       </div>
-     
-    
+     <br/>
+      <div class="pagination">
+        <a href="#">&laquo;</a>
+        <a href="/dashboardcustomer">1</a>
+        <a href="/dashboardcustomer?page=2&size=3">2</a>
+        <a href="/dashboardcustomer?page=3&size=3">3</a>
+        <a href="/dashboardcustomer?page=4&size=3">4</a>
+        <a href="/dashboardcustomer?page=5&size=3">5</a>        
+        <a href="#">&raquo;</a>
+      </div>
    
     
   </body>

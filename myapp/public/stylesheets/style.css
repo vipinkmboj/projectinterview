@@ -26,7 +26,10 @@ body {
 .all-anchors a:hover {
   color: rgb(151, 141, 141);
 }
-
+.account {
+  display: flex;
+  justify-content: space-evenly;
+}
 h2 {
   margin: 2em auto 1em auto;
 }
@@ -47,4 +50,22 @@ table {
   height: auto;
   margin: auto;
   border: 1px solid white;
+}
+.signout {
+  background-color: transparent;
+  border: 2px solid rgb(71, 157, 255);
+  border-radius: 5px;
+  padding: .5em;
+
+}
+.signout:hover {
+  cursor: pointer;
+}
+.pagination {
+  display: inline-block;
+}
+.pagination a {
+  padding: .5em;
+  color: white;
+  text-decoration: none;
 }

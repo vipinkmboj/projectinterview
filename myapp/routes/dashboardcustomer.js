@@ -7,7 +7,22 @@ router.get('/', function(req, res, next) {
     var loginUser = req.session.customerLoginUserName
     if(loginUser) {
 
-        var productDataFromDataBase = productDataModel.find({Username: loginUser});
+        // Pagination
+        let { page, size } = req.query;
+        if(!page) {
+            page = 1;
+        }
+        if(!size) {
+            size = 3;
+        }
+        const limit = parseInt(size);
+        const skip = (page - 1)*size;
+
+
+        const productDataFromDataBase = productDataModel.find({Username: loginUser}).limit(limit).skip(skip);
+        //
+
+        //var productDataFromDataBase = productDataModel.find({Username: loginUser});
         productDataFromDataBase.exec((err, productData) => {
             if(err) {
                 res.render('dashboardcustomer', { title: 'Project Interview', msg: '', loginUser: loginUser, productData: ''});
