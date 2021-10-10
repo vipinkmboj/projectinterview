@@ -45,6 +45,10 @@ h2 {
   border-radius: 5px;
 }
 
+.all-forms form input[type = "submit"]:hover {
+  cursor: pointer;
+}
+
 table {
   width: 100%;
   height: auto;
